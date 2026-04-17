@@ -1,61 +1,83 @@
 import Link from "next/link";
 
+const shopLinks = ["New Arrivals", "All Products", "Tops", "Bottoms", "Dresses & Skirts", "Accessories"];
+const infoLinks = ["About", "Brand Story", "Contact", "Shipping & Returns"];
+
 export default function Footer() {
   return (
-    <footer className="bg-[#3D3530] text-[#F7EDE2] mt-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer style={{ background: "#3D3530", color: "#F7EDE2" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
-        <div>
+        <div className="md:col-span-2">
           <p
-            className="text-lg tracking-[0.15em] uppercase mb-3"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            className="text-xl font-light tracking-[0.08em] mb-4"
+            style={{ fontFamily: "var(--font-serif), Georgia, serif", color: "#F7EDE2" }}
           >
             The Original Mission
           </p>
-          <p className="text-sm text-[#F7EDE2]/70 leading-relaxed">
+          <p className="text-sm leading-relaxed" style={{ color: "rgba(247,237,226,0.6)" }}>
             Handmade in Berlin.<br />
             Rooted in Mexico.<br />
-            Ships worldwide.
+            Ships everywhere.
           </p>
         </div>
 
-        {/* Links */}
+        {/* Shop links */}
         <div>
-          <p className="text-xs tracking-widest uppercase text-[#D4A5A5] mb-4">Navigate</p>
+          <p className="text-xs tracking-widest uppercase mb-4" style={{ color: "#A8BAA2" }}>Shop</p>
           <ul className="space-y-2">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/shop", label: "Shop" },
-              { href: "/about", label: "About" },
-              { href: "/contact", label: "Contact" },
-            ].map((l) => (
-              <li key={l.href}>
+            {shopLinks.map((l) => (
+              <li key={l}>
                 <Link
-                  href={l.href}
-                  className="text-sm text-[#F7EDE2]/70 hover:text-[#D4A5A5] transition-colors"
+                  href="/shop"
+                  className="text-sm transition-colors"
+                  style={{ color: "rgba(247,237,226,0.6)" }}
                 >
-                  {l.label}
+                  {l}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Social */}
+        {/* Info links */}
         <div>
-          <p className="text-xs tracking-widest uppercase text-[#D4A5A5] mb-4">Follow</p>
-          <a
-            href="https://instagram.com/theoriginalmission"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-[#F7EDE2]/70 hover:text-[#D4A5A5] transition-colors"
-          >
-            @theoriginalmission
-          </a>
-          <p className="text-xs text-[#F7EDE2]/40 mt-8">
-            © {new Date().getFullYear()} The Original Mission. All rights reserved.
-          </p>
+          <p className="text-xs tracking-widest uppercase mb-4" style={{ color: "#A8BAA2" }}>Info</p>
+          <ul className="space-y-2">
+            {infoLinks.map((l) => (
+              <li key={l}>
+                <Link
+                  href={l === "Contact" ? "/contact" : l === "About" || l === "Brand Story" ? "/about" : "#"}
+                  className="text-sm transition-colors"
+                  style={{ color: "rgba(247,237,226,0.6)" }}
+                >
+                  {l}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6">
+            <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "#A8BAA2" }}>Follow</p>
+            <a
+              href="https://instagram.com/theoriginalmission"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm transition-colors"
+              style={{ color: "rgba(247,237,226,0.6)" }}
+            >
+              @theoriginalmission
+            </a>
+          </div>
         </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between text-xs gap-2"
+        style={{ borderTop: "1px solid rgba(247,237,226,0.12)", color: "rgba(247,237,226,0.4)" }}
+      >
+        <span>© {new Date().getFullYear()} The Original Mission. All rights reserved.</span>
+        <span>@theoriginalmission</span>
       </div>
     </footer>
   );
